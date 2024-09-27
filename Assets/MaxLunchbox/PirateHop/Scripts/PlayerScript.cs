@@ -23,6 +23,7 @@ public class PlayerScript : MonoBehaviour
     // Only triggers for X Axis
     public void DirectionalInput(Vector2 direction)
     {
+        // Checks if the movement input is on the X axis
         if (direction.x != 0)
         {
             Hop(direction);
