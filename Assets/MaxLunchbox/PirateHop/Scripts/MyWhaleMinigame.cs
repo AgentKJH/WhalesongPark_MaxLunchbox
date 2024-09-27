@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PirateHop : MinigameBase
+public class MyWhaleMinigame : MinigameBase
 {
     /// <summary>
     /// This function is called at the end of the game so that it knows what to display on the score screen.
