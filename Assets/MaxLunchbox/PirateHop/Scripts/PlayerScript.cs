@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
-    [SerializeField] private Collider2D[] ShipDetector;
+    [SerializeField] private ShipDetection[] shipDetector; // 0 = Top, 1 = Bottem
 
     // Start is called before the first frame update
     void Start()
@@ -32,11 +32,18 @@ public class PlayerScript : MonoBehaviour
 
     private void Hop(Vector2 direction)
     {
-
+        if (direction.x > 0)
+        {
+            bool l_IsThereAShip = shipDetector[0].shipDetected;
+        }
+        else if (direction.x < 0)
+        {
+            bool l_IsThereAShip = shipDetector[1].shipDetected;
+        }
     }
 
-    private bool IsShip(Vector2 direction)
+    private GameObject FindShip()
     {
-        return false;
+        return gameObject;
     }
 }
