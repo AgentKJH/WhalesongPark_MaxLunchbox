@@ -18,7 +18,7 @@ TagManager:
   - Cleanup
   - MissedTrigger
   - MinigameManager
-  - Ship
+  - Tile
   layers:
   - Default
   - TransparentFX
@@ -37,7 +37,7 @@ TagManager:
   - PipeGroup3
   - PipeGroup4
   - Whale Body
-  - 
+  - Tile
   - 
   - 
   - 
