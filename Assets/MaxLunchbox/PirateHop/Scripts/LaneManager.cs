@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class LaneManager : MonoBehaviour
 {
-    GameObject[] LaneOneObjects;
-    GameObject[] LaneTwoObjects;
-    GameObject[] LaneThreeObjects;
+    [Header("Data")]
+    [SerializeField] SO_LaneData[] laneDataSets;
 
+    [Header("Lane")]
+    [SerializeField] GameObject[] LaneMarkers;
 
     public static LaneManager Instance;
 
