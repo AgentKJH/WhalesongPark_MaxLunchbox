@@ -17,4 +17,4 @@ MonoBehaviour:
   - 5
   - 7
   - 10
-  laneDirection: 1
+  laneDirection: -1
