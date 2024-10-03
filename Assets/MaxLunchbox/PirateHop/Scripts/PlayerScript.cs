@@ -47,15 +47,16 @@ public class PlayerScript : MonoBehaviour
     {
         if (ableToMove == false) return;
 
+        float raycastDistance = 1f;
         // Checks what direction on the X axis the player is trying to move
         if (direction.y > 0)
         {
-            RaycastHit2D[] hit = Physics2D.RaycastAll(gameObject.transform.position, Vector2.up, 5, layerMask);
+            RaycastHit2D[] hit = Physics2D.RaycastAll(gameObject.transform.position, Vector2.up, raycastDistance, layerMask);
             MoveToTile(FindTileToHopTo(hit));        
         }
         else if (direction.y < 0)
         {
-            RaycastHit2D[] hit = Physics2D.RaycastAll(gameObject.transform.position, Vector2.down, 5, layerMask);
+            RaycastHit2D[] hit = Physics2D.RaycastAll(gameObject.transform.position, Vector2.down, raycastDistance, layerMask);
             MoveToTile(FindTileToHopTo(hit));
         }
     }
@@ -72,8 +73,6 @@ public class PlayerScript : MonoBehaviour
         ableToMove = false;
         startTime = Time.time;
         gameObject.transform.position = tileToHopTo.transform.position;
-        print("Moved player");
-
         //Parents to ships
     }
 
@@ -81,18 +80,35 @@ public class PlayerScript : MonoBehaviour
     private GameObject FindTileToHopTo(RaycastHit2D[] hitInfo)
     {
         int numberOfTiles = hitInfo.Length;
-
+        print($"Number of tiles in raycast = {numberOfTiles}");
         float closestDistanceFromPlayer = float.MaxValue;
 
         for (int i = 0; i < numberOfTiles; i++)
         {
-            if (hitInfo[i].rigidbody.gameObject == currentTile) continue;
-
+            if (currentTile != null)
+            {
+                print($"Current Tile X = {currentTile.transform.position.x}");
+                print($"Hit Tile {i} X = {hitInfo[i].rigidbody.transform.localPosition.x}, {hitInfo[i].rigidbody.name}");
+                //if (hitInfo[i].rigidbody.transform.glo.x == currentTile.transform.localPosition.x) continue;
+            }
+            print("made it");
             Vector2 playerLocation = gameObject.transform.position;
             Vector2 currentTileLocation = hitInfo[i].rigidbody.transform.position;
 
             float distanceFromPlayer = Vector2.Distance(playerLocation, currentTileLocation);
+            /*
+            // If it finds a safe tile within an acceptable range then it will be returned
+            if (hitInfo[i].rigidbody.gameObject.GetComponent<Tile>().ArrayIndex == (int)TileTypes.Safe)
+            {
+                if (distanceFromPlayer < 1)
+                {
+                    currentTile = hitInfo[i].rigidbody.gameObject;
 
+                    return hitInfo[i].rigidbody.gameObject;
+                }
+            }
+            */
+            // Finds the closest non safe tile
             if (distanceFromPlayer < closestDistanceFromPlayer)
             {
                 closestDistanceFromPlayer = distanceFromPlayer;
