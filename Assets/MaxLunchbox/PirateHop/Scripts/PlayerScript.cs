@@ -95,6 +95,7 @@ public class PlayerScript : MonoBehaviour
         gameObject.transform.SetParent(h_PlayerCreatures.transform, true);
 
         // Death
+
     }
 
     // Returns the closest tile that the player can move to from the inputed array
@@ -115,14 +116,10 @@ public class PlayerScript : MonoBehaviour
             Vector2 currentTileLocation = hitInfo[i].rigidbody.transform.position;
 
             float distanceFromPlayer = Vector2.Distance(playerLocation, currentTileLocation);
-            
-            // If it finds a safe tile within an acceptable range then it will be returned
-            if (hitInfo[i].rigidbody.gameObject.GetComponent<Tile>().ArrayIndex == (int)TileTypes.Safe)
-            {     
-                currentTile = hitInfo[i].rigidbody.gameObject;
+    
+            currentTile = hitInfo[i].rigidbody.gameObject;
 
-                return hitInfo[i].rigidbody.gameObject;   
-            }
+            return hitInfo[i].rigidbody.gameObject;   
         }
 
         // If no tile found return nothing
