@@ -5,12 +5,10 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
     [SerializeField] LayerMask layerMask;
+    [SerializeField] GameObject h_PlayerCreatures;
 
     private bool ableToMove = true;
     private GameObject currentTile = null;
-
-    private float timeToWaitBetweenMovements = 1f;
-    private float startTime;
 
     // Start is called before the first frame update
     void Start()
@@ -67,9 +65,10 @@ public class PlayerScript : MonoBehaviour
             return;
         }
 
-        startTime = Time.time;
         gameObject.transform.position = tileToHopTo.transform.position;
+
         //Parents to ships
+        gameObject.transform.SetParent(tileToHopTo.transform, true);
     }
 
     // Returns the closest tile that the player can move to from the inputed array
@@ -77,7 +76,7 @@ public class PlayerScript : MonoBehaviour
     {
         int numberOfTiles = hitInfo.Length;
         print(numberOfTiles);
-        float closestDistanceFromPlayer = float.MaxValue;
+        // float closestDistanceFromPlayer = float.MaxValue;
 
         for (int i = 0; i < numberOfTiles; i++)
         {
@@ -93,23 +92,21 @@ public class PlayerScript : MonoBehaviour
             
             // If it finds a safe tile within an acceptable range then it will be returned
             if (hitInfo[i].rigidbody.gameObject.GetComponent<Tile>().ArrayIndex == (int)TileTypes.Safe)
-            {
-                if (distanceFromPlayer < 1)
-                {
-                    currentTile = hitInfo[i].rigidbody.gameObject;
+            {     
+                currentTile = hitInfo[i].rigidbody.gameObject;
 
-                    return hitInfo[i].rigidbody.gameObject;
-                }
+                return hitInfo[i].rigidbody.gameObject;   
             }
-            
+            /*
             // Finds the closest non safe tile
             if (distanceFromPlayer < closestDistanceFromPlayer)
             {
                 closestDistanceFromPlayer = distanceFromPlayer;
                 currentTile = hitInfo[i].rigidbody.gameObject;
             }
+            */
         }
 
-        return currentTile;
+        return null;
     }
 }
