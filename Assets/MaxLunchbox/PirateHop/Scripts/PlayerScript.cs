@@ -44,31 +44,57 @@ public class PlayerScript : MonoBehaviour
 
         float raycastDistance = 2f;
         // Checks what direction on the X axis the player is trying to move
+        // Up
         if (direction.y > 0)
         {
             RaycastHit2D[] hit = Physics2D.RaycastAll(gameObject.transform.position, Vector2.up, raycastDistance, layerMask);
-            MoveToTile(FindTileToHopTo(hit));        
+            MoveToTile(FindTileToHopTo(hit), direction);        
         }
+        //Down
         else if (direction.y < 0)
         {
             RaycastHit2D[] hit = Physics2D.RaycastAll(gameObject.transform.position, Vector2.down, raycastDistance, layerMask);
-            MoveToTile(FindTileToHopTo(hit));
+            MoveToTile(FindTileToHopTo(hit), direction);
         }
     }
 
-    // Move the player to the inputed gameobjects position
-    private void MoveToTile(GameObject tileToHopTo)
+    // Needs to be held outside of the MoveTile function to make it clean.
+    private int laneToJumpTo = 0; 
+
+    // Move the player to the inputed gameobjects position if it exists if not it moves the player to the next lane in specified direction
+    private void MoveToTile(GameObject tileToHopTo, Vector2 direction)
     {
-        if (tileToHopTo == null)
+        // If a tile is found to jump
+        if (tileToHopTo!= null)
         {
-            Debug.LogError("Null gameobject has been passed through. No tile data to move to");
+            // Moves player to the tile
+            gameObject.transform.position = tileToHopTo.transform.position;
+
+            // Parents to ships
+            gameObject.transform.SetParent(tileToHopTo.transform, true);
+            
             return;
         }
 
-        gameObject.transform.position = tileToHopTo.transform.position;
+        // If no tile is found
+        if (direction.y > 0)
+        {
+            laneToJumpTo = currentTile.GetComponent<ObjectMovement>().LaneID + 1;   
+        }
+        else if (direction.y < 0)
+        {
+            laneToJumpTo = currentTile.GetComponent<ObjectMovement>().LaneID - 1;
+        }
 
-        //Parents to ships
-        gameObject.transform.SetParent(tileToHopTo.transform, true);
+        Transform laneToJumpToLocation = LaneManager.Instance.LaneLocations[laneToJumpTo];
+
+        // Moves player to the next lane in specifed direction on the Y axis
+        gameObject.transform.position = new Vector3(gameObject.transform.position.x, laneToJumpToLocation.position.y, gameObject.transform.position.z);
+
+        // Parents to ships
+        gameObject.transform.SetParent(h_PlayerCreatures.transform, true);
+
+        // Death
     }
 
     // Returns the closest tile that the player can move to from the inputed array
@@ -76,12 +102,12 @@ public class PlayerScript : MonoBehaviour
     {
         int numberOfTiles = hitInfo.Length;
         print(numberOfTiles);
-        // float closestDistanceFromPlayer = float.MaxValue;
 
         for (int i = 0; i < numberOfTiles; i++)
         {
             if (currentTile != null)
             {
+                // If the lane ID of the raycasted tile is the same as the current tile then skip itteration of loop
                 if (hitInfo[i].rigidbody.GetComponent<ObjectMovement>().LaneID == currentTile.GetComponent<ObjectMovement>().LaneID) continue;
             }
 
@@ -97,16 +123,9 @@ public class PlayerScript : MonoBehaviour
 
                 return hitInfo[i].rigidbody.gameObject;   
             }
-            /*
-            // Finds the closest non safe tile
-            if (distanceFromPlayer < closestDistanceFromPlayer)
-            {
-                closestDistanceFromPlayer = distanceFromPlayer;
-                currentTile = hitInfo[i].rigidbody.gameObject;
-            }
-            */
         }
 
+        // If no tile found return nothing
         return null;
     }
 }
