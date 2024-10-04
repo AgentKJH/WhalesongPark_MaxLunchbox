@@ -21,13 +21,7 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ableToMove == false)
-        {
-            if (timeToWaitBetweenMovements >= Time.time - startTime)
-            {
-                ableToMove = true;
-            }
-        }
+
     }
 
      
@@ -35,6 +29,8 @@ public class PlayerScript : MonoBehaviour
     // Only triggers for X Axis
     public void DirectionalInput(Vector2 direction)
     {
+        if (direction == new Vector2(0, 0)) ableToMove = true;
+
         // Checks if the movement input is on the X axis
         if (direction.y != 0)
         {
@@ -46,8 +42,9 @@ public class PlayerScript : MonoBehaviour
     private void Hop(Vector2 direction)
     {
         if (ableToMove == false) return;
+        ableToMove = false;
 
-        float raycastDistance = 1f;
+        float raycastDistance = 2f;
         // Checks what direction on the X axis the player is trying to move
         if (direction.y > 0)
         {
@@ -70,7 +67,6 @@ public class PlayerScript : MonoBehaviour
             return;
         }
 
-        ableToMove = false;
         startTime = Time.time;
         gameObject.transform.position = tileToHopTo.transform.position;
         //Parents to ships
@@ -80,23 +76,21 @@ public class PlayerScript : MonoBehaviour
     private GameObject FindTileToHopTo(RaycastHit2D[] hitInfo)
     {
         int numberOfTiles = hitInfo.Length;
-        print($"Number of tiles in raycast = {numberOfTiles}");
+        print(numberOfTiles);
         float closestDistanceFromPlayer = float.MaxValue;
 
         for (int i = 0; i < numberOfTiles; i++)
         {
             if (currentTile != null)
             {
-                print($"Current Tile X = {currentTile.transform.position.x}");
-                print($"Hit Tile {i} X = {hitInfo[i].rigidbody.transform.localPosition.x}, {hitInfo[i].rigidbody.name}");
-                //if (hitInfo[i].rigidbody.transform.glo.x == currentTile.transform.localPosition.x) continue;
+                if (hitInfo[i].rigidbody.GetComponent<ObjectMovement>().LaneID == currentTile.GetComponent<ObjectMovement>().LaneID) continue;
             }
-            print("made it");
+
             Vector2 playerLocation = gameObject.transform.position;
             Vector2 currentTileLocation = hitInfo[i].rigidbody.transform.position;
 
             float distanceFromPlayer = Vector2.Distance(playerLocation, currentTileLocation);
-            /*
+            
             // If it finds a safe tile within an acceptable range then it will be returned
             if (hitInfo[i].rigidbody.gameObject.GetComponent<Tile>().ArrayIndex == (int)TileTypes.Safe)
             {
@@ -107,7 +101,7 @@ public class PlayerScript : MonoBehaviour
                     return hitInfo[i].rigidbody.gameObject;
                 }
             }
-            */
+            
             // Finds the closest non safe tile
             if (distanceFromPlayer < closestDistanceFromPlayer)
             {
