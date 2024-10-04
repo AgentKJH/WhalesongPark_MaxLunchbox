@@ -22,12 +22,16 @@ public class ObjectMovement : MonoBehaviour
     /// <param name="dir">The direction on the x axis that the object will move (should be a value of 1 or -1)</param>
     public void SetSpeed(float speed, int dir)
     {
-        newPos.x = (dir * speed) * Time.deltaTime;
+        newPos.x = dir * speed;
+        if (dir > 0)
+        {
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position += newPos;
+        transform.position += newPos * Time.deltaTime;
     }
 }
