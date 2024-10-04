@@ -16,7 +16,7 @@ MonoBehaviour:
   - {fileID: 187677861513651160, guid: 9e8e2289f55d2fc498a955f32c970fe8, type: 3}
   laneDirection: 1
   LaneSpeeds:
-  - 5
+  - 2
   - 7
   - 10
   spawnIntervals:

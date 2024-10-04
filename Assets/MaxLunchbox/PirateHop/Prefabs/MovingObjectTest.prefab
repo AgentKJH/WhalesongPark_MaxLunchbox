@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4066800947886366175}
   - component: {fileID: 1914947835572311360}
   - component: {fileID: 2852665332540327625}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: MovingObjectTest
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,8 @@ Transform:
   m_LocalPosition: {x: -4.5949383, y: -0.01899457, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6828223153354179559}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1914947835572311360
@@ -99,3 +100,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5669c0c9c7da71b4d8c44d574c28d9c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7244591831871086232
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6828223153354179559}
+  m_Layer: 17
+  m_Name: TilePlayerSocket
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6828223153354179559
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7244591831871086232}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4066800947886366175}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
