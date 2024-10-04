@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1412969112435282633}
   - component: {fileID: 8628836647906886178}
   - component: {fileID: 8824020228811352504}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: PlayerCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 2050542627
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 819424523, guid: 05f4ccf46abaa584693f8e2016815be0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -104,6 +104,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 131072
   h_PlayerCreatures: {fileID: 0}
+  spawnTile: {fileID: 0}
 --- !u!50 &8824020228811352504
 Rigidbody2D:
   serializedVersion: 4
