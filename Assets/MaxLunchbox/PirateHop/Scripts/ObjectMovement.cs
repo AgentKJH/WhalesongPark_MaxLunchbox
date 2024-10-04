@@ -11,6 +11,11 @@ public class ObjectMovement : MonoBehaviour
     Vector3 newPos;
 
     /// <summary>
+    /// int ref to the lane 
+    /// </summary>
+    public int LaneID {  get; set; }
+
+    /// <summary>
     /// Sets the speed and direction for the object to move each frame adjusted by deltaTime
     /// </summary>
     /// <param name="speed">The value the object will move on the x axis every frame</param>

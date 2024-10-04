@@ -12,9 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd6e71bdc9f445d4f8183a8d4064b18f, type: 3}
   m_Name: LaneTwoData_v1
   m_EditorClassIdentifier: 
-  laneObjects: []
+  laneObjects:
+  - {fileID: 187677861513651160, guid: 9e8e2289f55d2fc498a955f32c970fe8, type: 3}
+  laneDirection: 1
   LaneSpeeds:
   - 5
   - 7
   - 10
-  laneDirection: 1
+  spawnIntervals:
+  - 0.5
+  - 1
+  - 2
