@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
-    [SerializeField] LayerMask layerMask;
-    [SerializeField] GameObject h_PlayerCreatures;
+    [SerializeField] private LayerMask layerMask;
+    [SerializeField] private GameObject h_PlayerCreatures;
+    [SerializeField] private GameObject spawnTile; // Assign in editior
 
     private bool ableToMove = true;
     private GameObject currentTile = null;
@@ -13,7 +14,7 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        RespawnPlayer();
     }
 
     // Update is called once per frame
@@ -95,7 +96,7 @@ public class PlayerScript : MonoBehaviour
         gameObject.transform.SetParent(h_PlayerCreatures.transform, true);
 
         // Death
-
+        RespawnPlayer();
     }
 
     // Returns the closest tile that the player can move to from the inputed array
@@ -108,21 +109,35 @@ public class PlayerScript : MonoBehaviour
         {
             if (currentTile != null)
             {
-                // If the lane ID of the raycasted tile is the same as the current tile then skip itteration of loop
-                if (hitInfo[i].rigidbody.GetComponent<ObjectMovement>().LaneID == currentTile.GetComponent<ObjectMovement>().LaneID) continue;
+                print("here 1");
+                try
+                {
+                    // If the lane ID of the raycasted tile is the same as the current tile then skip itteration of loop
+                    if (hitInfo[i].rigidbody.GetComponent<ObjectMovement>().LaneID == currentTile.GetComponent<ObjectMovement>().LaneID) continue;
+                }
+                catch
+                {
+                    if (hitInfo[i].rigidbody.gameObject == currentTile) continue;
+                }
             }
 
-            Vector2 playerLocation = gameObject.transform.position;
-            Vector2 currentTileLocation = hitInfo[i].rigidbody.transform.position;
-
-            float distanceFromPlayer = Vector2.Distance(playerLocation, currentTileLocation);
-    
+            print("here 2");
             currentTile = hitInfo[i].rigidbody.gameObject;
 
             return hitInfo[i].rigidbody.gameObject;   
         }
 
+        print("Here 3");
         // If no tile found return nothing
         return null;
+    }
+
+    private void RespawnPlayer()
+    {
+        // Moves player to the next lane in specifed direction on the Y axis
+        gameObject.transform.position = spawnTile.transform.position;
+
+        gameObject.transform.SetParent(spawnTile.transform, true);
+        currentTile = spawnTile;
     }
 }

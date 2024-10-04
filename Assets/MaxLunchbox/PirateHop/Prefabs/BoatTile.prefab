@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 3656500391060757391}
   - component: {fileID: 1812540843565977377}
   - component: {fileID: 45567101538786353}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: BoatTile
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
