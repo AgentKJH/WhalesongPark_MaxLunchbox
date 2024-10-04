@@ -9,7 +9,7 @@ public class LaneManager : MonoBehaviour
     [SerializeField] SO_LaneData[] laneDataSets;
 
     [Header("Lane")]
-    [SerializeField] Transform[] LaneLocations;
+    [SerializeField] public Transform[] LaneLocations;
 
     /// <summary>
     /// An array of lists that stores the objects spawned in each lane 
