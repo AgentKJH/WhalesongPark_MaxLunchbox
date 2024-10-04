@@ -54,16 +54,15 @@ public class LaneManager : MonoBehaviour
         // loop through each lane
         for (int i = 0; i < laneObjects.Length; i++)
         {
-            if (spawnInLanes[i]) 
+            if (spawnInLanes[i])
             {
                 laneSpawnIntervalTimers[i] -= Time.deltaTime; // reduce timers
-                if (laneSpawnIntervalTimers[i] <= 0) 
+                if (laneSpawnIntervalTimers[i] <= 0)
                 { 
                     SpawnLaneObject(i); // if time reaches 0 spawn an object
                     laneSpawnIntervalTimers[i] = laneDataSets[i].spawnIntervals[difficultyIndex]; // reset interval timer based on difficulty
-                } 
+                }
             }
-
         }
     }
 
