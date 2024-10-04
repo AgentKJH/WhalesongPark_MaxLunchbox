@@ -17,9 +17,5 @@ MonoBehaviour:
   laneDirection: -1
   LaneSpeeds:
   - 2
-  - 7
-  - 10
   spawnIntervals:
-  - 0.5
   - 1
-  - 2
