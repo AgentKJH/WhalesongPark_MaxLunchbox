@@ -12,10 +12,31 @@ enum TileTypes
 public class Tile : MonoBehaviour
 {
     [HideInInspector]
-    public int arrayIndex = 0;
+    private int arrayIndex = 0;
 
     [HideInInspector]
-    public string[] tileTypes = new string[] {"Safe", "Unsafe"};
+    public string[] tileTypes = new string[] { "Safe", "Unsafe" };
+
+    public int ArrayIndex
+    {
+        get
+        {
+            if (arrayIndex == (int)TileTypes.Safe)
+            {
+                print("Safe tile");
+            }
+            else if (arrayIndex == (int)TileTypes.Unsafe)
+            {
+                print("Unsafe tile");
+            }
+
+            return arrayIndex;
+        }
+        set
+        {
+            ArrayIndex = value;
+        }
+    }
 }
 
 [CustomEditor(typeof(Tile))]
@@ -28,6 +49,6 @@ public class DropdownEditor : Editor
         Tile script = (Tile)target;
 
         GUIContent tileType = new GUIContent("Tile Type");
-        script.arrayIndex = EditorGUILayout.Popup(tileType, script.arrayIndex, script.tileTypes);
+        script.ArrayIndex = EditorGUILayout.Popup(tileType, script.ArrayIndex, script.tileTypes);
     }
 }
