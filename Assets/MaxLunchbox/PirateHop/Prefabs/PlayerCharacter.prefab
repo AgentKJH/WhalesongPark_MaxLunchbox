@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8556006123248885333}
   - component: {fileID: 1412969112435282633}
   - component: {fileID: 8628836647906886178}
+  - component: {fileID: 1424733564323132831}
   - component: {fileID: 8824020228811352504}
   m_Layer: 18
   m_Name: PlayerCharacter
@@ -105,6 +106,28 @@ MonoBehaviour:
     m_Bits: 131072
   h_PlayerCreatures: {fileID: 0}
   spawnTile: {fileID: 0}
+--- !u!95 &1424733564323132831
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3359300483951076322}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6526ad4f01439714f9ad5e54267fe437, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!50 &8824020228811352504
 Rigidbody2D:
   serializedVersion: 4

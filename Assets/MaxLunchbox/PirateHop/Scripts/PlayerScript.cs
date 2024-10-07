@@ -7,6 +7,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private GameObject h_PlayerCreatures;
     [SerializeField] private GameObject spawnTile; // Assign in editior
+    [SerializeField] private GameObject DeathBubblesPrefab;
 
     private bool ableToMove = true;
     private GameObject currentTile = null;
@@ -96,6 +97,7 @@ public class PlayerScript : MonoBehaviour
         gameObject.transform.SetParent(h_PlayerCreatures.transform, true);
 
         // Death
+        Instantiate(DeathBubblesPrefab, gameObject.transform).GetComponent<ParticleSystem>().Play();
         RespawnPlayer();
     }
 
@@ -134,7 +136,6 @@ public class PlayerScript : MonoBehaviour
 
     private void RespawnPlayer()
     {
-        // Moves player to the next lane in specifed direction on the Y axis
         gameObject.transform.position = spawnTile.transform.position;
 
         gameObject.transform.SetParent(spawnTile.transform, true);
