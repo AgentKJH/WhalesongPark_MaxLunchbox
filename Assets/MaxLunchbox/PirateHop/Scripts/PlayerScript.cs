@@ -67,13 +67,29 @@ public class PlayerScript : MonoBehaviour
     private void MoveToTile(GameObject tileToHopTo, Vector2 direction)
     {
         // If a tile is found to jump
-        if (tileToHopTo!= null)
+        if (tileToHopTo != null)
         {
             // Moves player to the tile
             gameObject.transform.position = tileToHopTo.transform.position;
 
             // Parents to ships
             gameObject.transform.SetParent(tileToHopTo.transform, true);
+
+            // Changes currret boat colour to white
+            if (currentTile != null)
+            {
+                try
+                {
+                    if (currentTile.GetComponent<ObjectMovement>())
+                    {
+                        ChangeBoatColour(tileToHopTo, gameObject.GetComponent<SpriteRenderer>().color);
+                    }
+                }
+                catch
+                {
+
+                }
+            }     
             
             return;
         }
@@ -101,9 +117,31 @@ public class PlayerScript : MonoBehaviour
         RespawnPlayer();
     }
 
+    // Dont complain about my use of the proper spelling of colour!
+    private void ChangeBoatColour(GameObject boat, Color colour)
+    {
+        boat.GetComponent<SpriteRenderer>().color = colour;
+    }
+
     // Returns the closest tile that the player can move to from the inputed array
     private GameObject FindTileToHopTo(RaycastHit2D[] hitInfo)
     {
+        // Changes currret boat colour to white
+        if (currentTile != null)
+        {
+            try
+            {
+                if (currentTile.GetComponent<ObjectMovement>())
+                {
+                    ChangeBoatColour(currentTile, Color.white);
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
         int numberOfTiles = hitInfo.Length;
         print(numberOfTiles);
 
@@ -111,7 +149,6 @@ public class PlayerScript : MonoBehaviour
         {
             if (currentTile != null)
             {
-                print("here 1");
                 try
                 {
                     // If the lane ID of the raycasted tile is the same as the current tile then skip itteration of loop
@@ -123,13 +160,11 @@ public class PlayerScript : MonoBehaviour
                 }
             }
 
-            print("here 2");
             currentTile = hitInfo[i].rigidbody.gameObject;
 
             return hitInfo[i].rigidbody.gameObject;   
         }
 
-        print("Here 3");
         // If no tile found return nothing
         return null;
     }
