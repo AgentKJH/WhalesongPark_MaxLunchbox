@@ -97,7 +97,7 @@ public class PlayerScript : MonoBehaviour
         gameObject.transform.SetParent(h_PlayerCreatures.transform, true);
 
         // Death
-        Instantiate(DeathBubblesPrefab, gameObject.transform).GetComponent<ParticleSystem>().Play();
+        Instantiate(DeathBubblesPrefab, gameObject.transform.position, Quaternion.identity).GetComponent<ParticleSystem>().Play();
         RespawnPlayer();
     }
 
