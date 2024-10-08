@@ -19,6 +19,7 @@ TagManager:
   - MissedTrigger
   - MinigameManager
   - Tile
+  - Land
   layers:
   - Default
   - TransparentFX
