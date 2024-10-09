@@ -12,6 +12,8 @@ public class PlayerScript : MonoBehaviour
     private bool ableToMove = true;
     private GameObject currentTile = null;
 
+    public bool hasCoin { get; set; }
+
     // Start is called before the first frame update
     void Start()
     {
