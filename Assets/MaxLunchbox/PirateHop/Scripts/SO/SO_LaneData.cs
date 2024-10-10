@@ -22,9 +22,11 @@ public class SO_LaneData : ScriptableObject
     /// <summary>
     /// An array of speeds for lane objects to move indexed by the difficulty level of the game
     /// </summary
-    [SerializeField] public float[] LaneSpeeds;
+    [SerializeField] public float[] LaneMinSpeeds;
     /// <summary>
     /// The time before spawning a new object in the lane, indexed by the difficulty level of the game
     /// </summary>
-    [SerializeField] public float[] spawnIntervals;
+    [SerializeField] public float[] spawnIntervalsMin;
+    [SerializeField] public float[] spawnIntervalsMax;
+
 }

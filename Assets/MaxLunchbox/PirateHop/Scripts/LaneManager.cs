@@ -60,7 +60,7 @@ public class LaneManager : MonoBehaviour
                 if (laneSpawnIntervalTimers[i] <= 0)
                 { 
                     SpawnLaneObject(i); // if time reaches 0 spawn an object
-                    laneSpawnIntervalTimers[i] = laneDataSets[i].spawnIntervals[difficultyIndex]; // reset interval timer based on difficulty
+                    laneSpawnIntervalTimers[i] = Random.Range(laneDataSets[i].spawnIntervalsMin[difficultyIndex], laneDataSets[i].spawnIntervalsMax[difficultyIndex]); // reset interval timer based on difficulty
                 }
             }
         }
@@ -69,14 +69,14 @@ public class LaneManager : MonoBehaviour
     void SpawnLaneObject(int LaneIndex)
     {
         // randomly select an object to spawn from the related lane data
-        GameObject objectToSpawn = laneDataSets[LaneIndex].laneObjects[Random.Range(0, laneDataSets[LaneIndex].laneObjects.Length-1)];
+        GameObject objectToSpawn = laneDataSets[LaneIndex].laneObjects[Random.Range(0, laneDataSets[LaneIndex].laneObjects.Length - 1)];
 
         // spawn object on lane and add to the related list
         GameObject objectSpawned = Instantiate(objectToSpawn, LaneLocations[LaneIndex]);
         //laneObjects[LaneIndex].Add(objectSpawned);
 
         // Set movement speed and direction for spawned object
-        objectSpawned.GetComponent<ObjectMovement>().SetSpeed(laneDataSets[LaneIndex].LaneSpeeds[difficultyIndex], laneDataSets[LaneIndex].laneDirection);
+        objectSpawned.GetComponent<ObjectMovement>().SetSpeed(laneDataSets[LaneIndex].LaneMinSpeeds[difficultyIndex], laneDataSets[LaneIndex].laneDirection);
         objectSpawned.GetComponent<ObjectMovement>().LaneID = LaneIndex; // set lane ID
     }
 }

@@ -15,7 +15,9 @@ MonoBehaviour:
   laneObjects:
   - {fileID: 721647692836377615, guid: eb6d596958b7d8845b9b256e76b16714, type: 3}
   laneDirection: 1
-  LaneSpeeds:
+  LaneMinSpeeds:
   - 1
-  spawnIntervals:
+  spawnIntervalsMin:
+  - 1.5
+  spawnIntervalsMax:
   - 3

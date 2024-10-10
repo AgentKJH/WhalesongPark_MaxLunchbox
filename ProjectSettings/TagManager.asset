@@ -20,6 +20,7 @@ TagManager:
   - MinigameManager
   - Tile
   - Land
+  - Coin
   layers:
   - Default
   - TransparentFX

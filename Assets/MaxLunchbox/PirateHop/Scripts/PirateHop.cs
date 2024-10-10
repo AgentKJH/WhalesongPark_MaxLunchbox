@@ -1,10 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Permissions;
 using UnityEngine;
 
 public class PirateHop : MinigameBase
 {
     [SerializeField] private PlayerScript[] playerScripts;
+
+    // Coins stuff
+    private int[] coinsCollected = new int[3];
+    public void AddCoinScore(int PlayerNumber)
+    {
+        coinsCollected[PlayerNumber] += 1;
+    }
 
     /// <summary>
     /// This function is called at the end of the game so that it knows what to display on the score screen.
@@ -20,7 +28,7 @@ public class PirateHop : MinigameBase
         {
             if (PlayerUtilities.GetPlayerState(i) == Player.PlayerState.ACTIVE)
             {
-                gsd.PlayerScores[i] = 1;                        //Each player scored one point
+                gsd.PlayerScores[i] = coinsCollected[i];        //Each player scored one point
                 gsd.PlayerTimes[i] = gsd.PlayerScores[i] * 2;   //Each player gets two seconds per point scored
                 teamTime += gsd.PlayerTimes[i];                 //Keep a running total of the total time scored by all players
             }
