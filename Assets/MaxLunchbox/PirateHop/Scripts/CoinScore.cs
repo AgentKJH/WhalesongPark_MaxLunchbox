@@ -11,6 +11,11 @@ public class CoinScore : MonoBehaviour
 
     private GameObject SpawnedCoin;
 
+    private void Start()
+    {
+        SpawnCoin();
+    }
+
     void SpawnCoin()
     {
         print("Spawn Coin");
@@ -28,7 +33,7 @@ public class CoinScore : MonoBehaviour
             SpawnCoin();
             Destroy(collision.gameObject);
             
-            //pirateHopMiniGameClass.AddCoinScore(PlayerNumber - 1); to increase Score
+            pirateHopMiniGameClass.AddCoinScore(PlayerNumber - 1); //to increase Score
         }
     }
 }
